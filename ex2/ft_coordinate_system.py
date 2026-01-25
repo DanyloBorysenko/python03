@@ -7,7 +7,7 @@ def ft_coordinate_system() -> None:
     zero_pos: tuple = (0, 0, 0)
     print(f"\nPosition created: {pos}")
     try:
-        dist = calculate_dist(zero_pos, pos)
+        dist: float = calculate_dist(zero_pos, pos)
         print(f"Distance between {zero_pos} and {pos}: {dist:.2f}")
     except ValueError as e:
         print(e)
@@ -45,9 +45,9 @@ def parsing_coordinates(data: str) -> tuple:
 
 
 def calculate_dist(pos1: tuple, pos2: tuple) -> float:
-    dist = math.sqrt((pos2[0] - pos1[0]) ** 2 +
-                     (pos2[1] - pos1[1]) ** 2 +
-                     (pos2[2] - pos1[2]) ** 2)
+    dist: float = math.sqrt((pos2[0] - pos1[0]) ** 2 +
+                            (pos2[1] - pos1[1]) ** 2 +
+                            (pos2[2] - pos1[2]) ** 2)
     return dist
 
 

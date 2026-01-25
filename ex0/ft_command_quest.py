@@ -15,4 +15,5 @@ def ft_command_quest() -> None:
     print(f"Total arguments: {len(sys.argv)}")
 
 
-ft_command_quest()
+if __name__ == "__main__":
+    ft_command_quest()
