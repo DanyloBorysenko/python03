@@ -122,10 +122,26 @@
 #     manager.show_items_by_category(inventory)
 #     manager.display_dict_properties(inventory)
 #     manager.simple_look_up(sword_type, inventory)
+import sys
 
 
 class Inventory_System_Manager():
     """represents class for managing inventory tasks"""
+    def parse_input(self, args: list[str]) -> dict[str, int]:
+        inventory: dict[str, int] = {}
+        for arg in args:
+            key_value: list[str] = arg.split(":")
+            if len(key_value) != 2:
+                continue
+            try:
+                inventory.update({key_value[0]: int(key_value[1])})
+            except TypeError as e:
+                print(f"Key: {key_value[0]} Value: {key_value[1]} "
+                      f"were not added to the inventory")
+                print(e)
+                continue
+        return inventory
+
     def display_basic_analysis(self, inventory: dict[str, int]) -> None:
         print("\n=== Inventory System Analysis ===")
         total: int = 0
@@ -179,12 +195,7 @@ class Inventory_System_Manager():
 if __name__ == "__main__":
     manager: Inventory_System_Manager = Inventory_System_Manager()
 
-    inventory: dict[str, int] = {}
-    inventory.update({'sword': 1})
-    inventory.update({'potion': 5})
-    inventory.update({'shield': 2})
-    inventory.update({'armor': 3})
-    inventory.update({'helmet': 1})
+    inventory: dict[str, int] = manager.parse_input(sys.argv[1:])
 
     manager.display_basic_analysis(inventory)
     manager.display_inventory(inventory)
