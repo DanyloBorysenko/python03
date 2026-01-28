@@ -9,7 +9,7 @@
 #     def __init__(self, item_type_name: str, category: Category):
 #         self.item_type_name = item_type_name
 #         self.category = category
-    
+
 #     def __repr__(self):
 #         return f"{self.item_type_name}"
 
@@ -19,7 +19,7 @@
 #     def __init__(self, item_name: str, item_type: Item_Type):
 #         self.item_name = item_name
 #         self.item_type = item_type
-    
+
 #     def __repr__(self):
 #         return f"{self.item_name}"
 
@@ -65,7 +65,7 @@
 #         print(f"Most abundant: {key_most.item_type_name} ({len(most)} unit)")
 #         print(f"Least abundant: {key_least.item_type_name} "
 #               f"({len(least)} unit)")
-        
+
 #     def show_items_by_category(self, inventory: Inventory) -> None:
 #         category_inventory: dict[Category, dict[str, int]] = {}
 #         for key, value in inventory.storage.items():
@@ -81,7 +81,7 @@
 #         print("\n=== Dictionary Properties Demo ===")
 #         print(f"{inventory.storage.keys()}")
 #         print(f"{inventory.storage.values()}")
-    
+
 #     def simple_look_up(self, item_type: Item_Type, inventory: Inventory) -> None:
 #         print(f"Sample lookup - '{item_type.item_type_name}' in inventory: "
 #               f"{True if item_type in inventory.storage else False}")
@@ -153,8 +153,9 @@ class Inventory_System_Manager():
         print("\n=== Inventory Statistics ===")
         print(f"Most abundant: {key_most} ({max_value} unit)")
         print(f"Least abundant: {key_least} ({min_value} unit)")
-        
-    def show_items_by_category(self, inventory: dict[str, dict[str, int]]) -> None:
+
+    def show_items_by_category(self,
+                               inventory: dict[str, dict[str, int]]) -> None:
         print("\n=== Item Categories ===")
         for key, value in inventory.items():
             print(f"{key}: {value}")
@@ -163,29 +164,32 @@ class Inventory_System_Manager():
         print("\n=== Dictionary Properties Demo ===")
         print(f"{inventory.keys()}")
         print(f"{inventory.values()}")
-    
-    def simple_look_up(self, item_type: str, inventory: dict[str, int]) -> None:
+
+    def simple_look_up(self, item_type: str,
+                       inventory: dict[str, int]) -> None:
         print(f"Sample lookup - '{item_type}' in inventory: "
               f"{True if item_type in inventory else False}")
-        
+
+
 if __name__ == "__main__":
-        manager: Inventory_System_Manager = Inventory_System_Manager()
+    manager: Inventory_System_Manager = Inventory_System_Manager()
 
-        inventory: dict[str, int] = {}
-        inventory.update({'sword': 1})
-        inventory.update({'potion': 5})
-        inventory.update({'shield': 2})
-        inventory.update({'armor': 3})
-        inventory.update({'helmet': 1})
-        
-        manager.display_basic_analysis(inventory)
-        manager.display_inventory(inventory)
-        manager.display_statistics(inventory)
+    inventory: dict[str, int] = {}
+    inventory.update({'sword': 1})
+    inventory.update({'potion': 5})
+    inventory.update({'shield': 2})
+    inventory.update({'armor': 3})
+    inventory.update({'helmet': 1})
 
-        inv_with_categories: dict[str, dict[str, int]] = {}
-        inv_with_categories["Moderate"] = {'potion': 5}
-        inv_with_categories["Scarce"] = {'sword': 1, 'shield': 2, 'armor': 3, 'helmet': 1}
-        
-        manager.show_items_by_category(inv_with_categories)
-        manager.display_dict_properties(inventory)
-        manager.simple_look_up('sword', inventory)
+    manager.display_basic_analysis(inventory)
+    manager.display_inventory(inventory)
+    manager.display_statistics(inventory)
+
+    inv_with_categories: dict[str, dict[str, int]] = {}
+    inv_with_categories["Moderate"] = {'potion': 5}
+    inv_with_categories["Scarce"] = {'sword': 1, 'shield': 2, 'armor': 3,
+                                     'helmet': 1}
+
+    manager.show_items_by_category(inv_with_categories)
+    manager.display_dict_properties(inventory)
+    manager.simple_look_up('sword', inventory)

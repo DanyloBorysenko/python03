@@ -18,14 +18,52 @@ class Game_Analytics_Dashboard():
     def dict_comprehensions_examples(self, data: list[dict]) -> None:
         print("\n=== Dict Comprehension Examples ===")
         players_score: dict[str, int]
-        players_score = {dictionary["name"]: dictionary["score"] for dictionary in data}
+        players_score = {dictionary["name"]: dictionary["score"]
+                         for dictionary in data}
         print(f"Player scores: {players_score}")
 
+        achiev_dict: dict[str, int]
+        achiev_dict = {dictionary["name"]: len(dictionary["achievements"])
+                       for dictionary in data}
+        print(f"Achievement counts: {achiev_dict}")
+
         score_category: dict[str, list[str]] = {}
-        score_category.update({"Low": [dictionary["name"] for dictionary in data if dictionary["level"] == 1]})
-        score_category.update({"Medium": [dictionary["name"] for dictionary in data if 1 < dictionary["level"] < 10]})
-        score_category.update({"High": [dictionary["name"] for dictionary in data if dictionary["level"] == 10]})
-        print(f"{score_category}")
+        score_category.update({"Low": [dictionary["name"] for dictionary
+                                       in data if dictionary["level"] == 1]})
+        score_category.update({"Medium": [dictionary["name"]
+                                          for dictionary in data
+                                          if 1 < dictionary["level"] < 10]})
+        score_category.update({"High": [dictionary["name"]
+                                        for dictionary in data
+                                        if dictionary["level"] == 10]})
+        print(f"Score categories: {score_category}")
+
+    def set_comprehensions_examples(self, data: list[dict]) -> int:
+        print("\n=== Set Comprehension Examples ===")
+        unique_players: set[str]
+        unique_players = {dictionary["name"] for dictionary in data}
+        print(f"Unique players: {unique_players}")
+
+        unique_achievements: set[str] = {achievement
+                                         for dictionary in data
+                                         for achievement in
+                                         dictionary["achievements"]}
+        print(f"Unique achievements: {unique_achievements}")
+        return len(unique_achievements)
+
+    def combined_analysis(self, data: list[dict],
+                          unq_achiev_count: int) -> None:
+        print("\n=== Combined Analysis ===")
+        print(f"Total players: {len(data)}")
+        print(f"Total unique achievements: {unq_achiev_count}")
+        scores: list[int] = [dictionary["score"] for dictionary in data]
+        print(f"Average score: {sum(scores) / len(data)}")
+        max_score: int = sorted(scores)[-1]
+        player_name: str | None = None
+        for player in data:
+            if player["score"] == max_score:
+                player_name = player["name"]
+        print(f"The winner: {player_name} - {max_score} scores")
 
 
 if __name__ == "__main__":
@@ -34,25 +72,27 @@ if __name__ == "__main__":
     alice: dict = {"name": "alice",
                    "score": 2000,
                    "level": 2,
-                   "achievments": {"level_2", "first_kill"}}
+                   "achievements": {"level_2", "first_kill"}}
     bob: dict = {"name": "bob",
                  "score": 3000,
                  "level": 3,
-                 "achievments": {"level_2", "level_3",
-                                 "first_kill", "boss_slayer"}}
+                 "achievements": {"level_2", "level_3",
+                                  "first_kill", "boss_slayer"}}
     charlie: dict = {"name": "charlie",
                      "score": 1000,
                      "level": 1,
-                     "achievments": set()}
+                     "achievements": set()}
 
     din: dict = {"name": "din",
                  "score": 5000,
                  "level": 10,
-                 "achievments": {"level_2", "level_3",
-                                 "level_4", "level_5",
-                                 "first_kill", "boss_slayer", "winner"}}
+                 "achievements": {"level_2", "level_3",
+                                  "level_4", "level_5",
+                                  "first_kill", "boss_slayer", "winner"}}
 
     data: list[dict] = [alice, bob, charlie, din]
     high_score: int = 2000
     dashboard.list_comprehension_examples(data, high_score)
     dashboard.dict_comprehensions_examples(data)
+    unq_achiev_count: int = dashboard.set_comprehensions_examples(data)
+    dashboard.combined_analysis(data, unq_achiev_count)
