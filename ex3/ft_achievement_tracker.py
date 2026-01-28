@@ -1,4 +1,5 @@
 class Player():
+    """represents player"""
     def __init__(self, name: str, achievements: set[str]):
         self.name = name
         self.achievements = achievements

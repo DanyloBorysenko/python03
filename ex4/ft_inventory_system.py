@@ -70,9 +70,11 @@
 #         category_inventory: dict[Category, dict[str, int]] = {}
 #         for key, value in inventory.storage.items():
 #             if key.category not in category_inventory:
-#                 category_inventory.update({key.category: {key.item_type_name: len(value)}})
+#                 category_inventory.update({key.category: {
+#                     key.item_type_name: len(value)}})
 #             else:
-#                 category_inventory.get(key.category).update({key.item_type_name: len(value)})
+#                 category_inventory.get(key.category).update({
+#                     key.item_type_name: len(value)})
 #         print("\n=== Item Categories ===")
 #         for key, value in category_inventory.items():
 #             print(f"{key.category_name}: {value}")
@@ -82,9 +84,11 @@
 #         print(f"{inventory.storage.keys()}")
 #         print(f"{inventory.storage.values()}")
 
-#     def simple_look_up(self, item_type: Item_Type, inventory: Inventory) -> None:
+#     def simple_look_up(self, item_type: Item_Type,
+#                        inventory: Inventory) -> None:
 #         print(f"Sample lookup - '{item_type.item_type_name}' in inventory: "
 #               f"{True if item_type in inventory.storage else False}")
+
 
 # if __name__ == "__main__":
 #     moderate_category = Category("Moderate")
@@ -118,6 +122,7 @@
 #     manager.show_items_by_category(inventory)
 #     manager.display_dict_properties(inventory)
 #     manager.simple_look_up(sword_type, inventory)
+
 
 class Inventory_System_Manager():
     """represents class for managing inventory tasks"""
